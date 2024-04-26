@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% block content %}
+<!-- Carousel -->
+<div id="demo" class=" container carousel slide mt-1" data-bs-ride="carousel">
+
+  <!-- Indicators/dots -->
+ <div class="carousel-indicators">
+    <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
+    <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
+    <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
+  </div>
+
+  <!-- The slideshow/carousel -->
+  <div class="carousel-inner">
+    <!--<div class="carousel-item active">
+      <img src="https://www.brookings.edu/wp-content/uploads/2019/03/RTX2FKNP.jpg?quality=75" alt="Los Angeles" class="d-block w-100">
+      <div class="carousel-caption" style="margin-bottom: 5%;">
+          <h1><span style="text-shadow:2px 2px 2px black;color:white;font-size:60px;">Affordable &</span><span style="color:red;font-size:60px;text-shadow:2px 2px 2px white;"> Hands on</span> <span style="text-shadow:2px 2px 2px white;color:green;font-size:60px;">Learning</span></h1>
+      </div>
+    </div>-->
+    <div class="carousel-item active">
+      <img src="#" alt="" class="d-block w-100">
+      <div class="carousel-caption" style="margin-bottom: 0%;">
+         <h1><span style="text-shadow:4px 2px 2px black;color:darkred;font-size:60px;">Available</span><span style="color:lightblue;font-size:60px;text-shadow:4px 2px 2px black;"> Exciting</span> <span style="text-shadow:2px 2px 4px darkred;color:black;font-size:60px;">Exp</span></h1>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="#" alt="" class="d-block w-100">
+      <div class="carousel-caption" style="margin-bottom: 0%;">
+          <h1><span style="text-shadow:4px 2px 2px black;color:aqua;font-size:60px;">Experience</span><span style="color:black;font-size:60px;text-shadow:4px 2px 2px darkred;"> Advocate</span> <span style="text-shadow:2px 4px 2px rebeccapurple;color: -moz-mac-chrome-active;font-size:60px;">Enjoy</span></h1>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Left and right controls/icons -->
+  <button class="carousel-control-prev" type="button" data-bs-target="#" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target=<!--"#demo"--> data-bs-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </button>
+</div>
+
+<!-- Features Section -->
+<section class="container my-5">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="text-center">
+        <i class="fas fa-code feature-icon"></i>
+        <h3>Expert Devs</h3>
+        <p>Learn from experienced 'Pros' in the making.</p>
+         <img src="#" alt="" style="border-radius:50%;width:120px;height:120px;">
+
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="text-center">
+        <i class="fas fa-laptop-code feature-icon"></i>
+        <h3>Interactive online platform</h3>
+        <p>Engage hands-on as you proceed with your journey.</p>
+        <img src="#" alt="" style="border-radius:50%;width:120px;height:120px;">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="text-center">
+        <i class="fas fa-certificate feature-icon"></i>
+        <h3>Certificates Awarded per Achievment</h3>
+        <p>Earn cupons upon completion of missions.</p>
+        <img src="#" alt="" style="border-radius:50%;width:120px;height:120px;">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- About Section -->
+<section class=" container bg-light py-5">
+  <div class="container">
+    <h2 class="text-center mb-4">About Us</h2>
+    <p class="text-center"></p>
+  </div>
+</section>
+
+{% endblock %}
+
+
