@@ -1,0 +1,86 @@
+{% extends 'dashbase.html' %}
+{% block title %}
+    obdashboard
+{% endblock %}
+
+{% block content %}
+
+  <div class="row p-5" style="margin-left: 40px;">
+
+    <!-- Left Column: Student Registration Form -->
+    <div class="col-md-4" style="border-right: 1px solid;border-left: 1px solid ;">
+      <u><h3 class="bg-dark text-white p-1 text-center">Add Course</h3></u>
+      <form>
+        <div class="mb-3">
+          <label for="name" class="form-label">Course Name</label>
+          <input type="text" class="form-control" id="course_name" name="course_name" placeholder="Enter your course name" required>
+        </div>
+        <div class="mb-3">
+          <label for="desc" class="form-label">Description</label>
+           <textarea class="form-control"  rows="5"></textarea>
+        </div>
+        <button type="submit" class="btn btn-success">Add</button>
+      </form>
+    </div>
+
+    <!-- Right Column: Table displaying registered students -->
+    <div class="col-md-8" style="border-right: 1px solid red;">
+      <u><h3 class="bg-dark text-gray text-center p-1">Courses</h3></u>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Simulation</td>
+            <td>experience it like reality</td>
+            <td>
+                 <a href="#" type="button" class="btn btn-outline-dark">Edit</a>
+            </td>
+            <td>
+                <a href="#" type="button" class="btn btn-outline-danger">Delete</a>
+            </td>
+          </tr>
+          <tr>
+            <td>Open World</td>
+            <td>experience it like reality with a touch of fantasy on the side limited to your imagination</td>
+            <td>
+                 <a href="#" type="button" class="btn btn-outline-dark">Edit</a>
+            </td>
+            <td>
+                <a href="#" type="button" class="btn btn-outline-danger">Delete</a>
+            </td>
+          </tr>
+          <tr>
+            <td>Racing</td>
+            <td>compete to your hearts content inside the fastest of vehicles of various sizes</td>
+            <td>
+                 <a href="#" type="button" class="btn btn-outline-success">Edit</a>
+            </td>
+            <td>
+                <a href="#" type="button" class="btn btn-outline-danger">Delete</a>
+            </td>
+          </tr>
+          <tr>
+            <td>MMORPG</td>
+            <td>engage in interactive gaming while having your 'fun'</td>
+            <td>
+                 <a href="#" type="button" class="btn btn-outline-success">Edit</a>
+
+            </td>
+            <td>
+                 <a href="#" type="button" class="btn btn-outline-danger">Delete</a>
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+{% endblock %}
