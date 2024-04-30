@@ -15,9 +15,9 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
-
+from django.urls import path, include
 from Registration import views
+from rest_framework.urlpatterns import format_suffix_patterns
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -33,8 +33,10 @@ urlpatterns = [
     path('dashboard/', views.dashboard, name='dashboard'),
     path('create/', views.create_course, name='create_course'),
     path('adduser/', views.adduser, name='addinguser'),  # Update the view name here
-    path('addstudent/', views.addstudent, name='addinguser'),  # Update the view name here
+    # path('addstudent/', views.addstudent, name='addinguser'),   Update the view name here
     path('editstudent/<int:id>/', views.editstudent, name='editstudent'),
     path('updatestudent/<int:id>/', views.updatestudent, name='updatestudent'),
-    path('deletestudent/<int:id>/', views.delstudent, name='deletestudent')
+    path('deletestudent/<int:id>/', views.delstudent, name='deletestudent'),
+    path('students/', views.student_list),
+    path('Product/', views.ProductList, name='ProductList'),
 ]

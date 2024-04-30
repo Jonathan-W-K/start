@@ -1,37 +1,45 @@
-from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.shortcuts import render, redirect
 from django.template import loader
-from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.csrf import csrf_exempt
-from .models import Myuser, Student
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+
+from .forms import UserRegistrationForm
+from .models import User, Student
+from .serializers import ProductSerializer
+from .models import ProductList
 
 
-# from .forms import CourseForm  # Assuming you have a CourseForm defined in forms.py
-# from .models import Course  # Assuming you have a Course model defined in models.py
+@api_view(['GET', 'POST'])
+def product_list(request):
+    if request.method == 'GET':
+        products = ProductList.objects.all()
+        serializer = ProductSerializer(products, many=True)
+        return Response(serializer.data)
+
+
+def product_list_view(request):
+    products = ProductList.objects.all() # retrieve all instances of products from database
+    context = {'products': products}
+    return render(request, 'product_list.html', context)
 
 
 def create_course(request):
     if request.method == 'POST':
         # Process the form data
-        course_name = request.POST.get('course_name')  # Assuming 'course_name' is the name of the input field
-        # You can retrieve other form fields similarly
+        course_name = request.POST.get('course_name')
+        # Your processing logic goes here
 
-        # Here you can perform any additional processing or validation before saving
-
-        # Save the course data (You should replace this with your actual save logic)
-        # For example, you might save it to a database model
-        # Example: Course.objects.create(course_name=course_name)
-
-        # After saving, you can redirect to a success page or another view
-        return redirect('course_list')  # Redirect to the URL name for your course list view
+        # Redirect to the course list page
+        return redirect('course_list')
     else:
         # If it's a GET request, render the empty form
         return render(request, 'create_course.html')
 
 
 def registration(request):
-    template = loader.get_template('register.html')
-    return HttpResponse(template.render())
+    return render(request, 'register.html')
 
 
 def mypage(request):
@@ -65,8 +73,15 @@ def login(request):
 
 
 def dashboard(request):
-    data = Student.objects.all();
-    context = {'data': data}
+    if request.method == 'POST':
+        form = UserRegistrationForm(request.POST)
+        if form.is_valid():
+            form.save()  # Save the form data into the database
+            return redirect('dashboard')  # Redirect back to the dashboard
+
+    else:
+        form = UserRegistrationForm()
+    context = {'form': form}
     return render(request, 'dashboard.html', context)
 
 
@@ -85,39 +100,23 @@ def dashbase(request):
     return HttpResponse(template.render())
 
 
-# @csrf_protect
-
 @csrf_exempt
 def adduser(request):
-    template = loader.get_template('login.html')
     if request.method == 'POST':
         name = request.POST.get('username')
         email = request.POST.get('email')
         password = request.POST.get('password')
-        mydata = {'name': name, 'email': email, 'password': password}
-        print(mydata)
-        query = Myuser(username=name, email=email, password=password)
-        query.save()
-    return HttpResponse(template.render())
 
+        # Create a new User object and save it to the database
+        User.objects.create(username=name, email=email, password=password)
 
-def addstudent(request):
-    if request.method == 'POST':
-        name = request.POST.get('studname')
-        email = request.POST.get('studmail')
-        password = request.POST.get('password')
-        age = request.POST.get('studage')
-        obj1 = Student(studentname=name, email=email, password=password, age=age)
-        obj1.save()
-
-    # fetch the student data to be displayed
-    data = Student.objects.all();
-    context = {'data': data}
-    return render(request, 'dashboard.html', context)
+        return redirect('dashboard')  # Redirect to the dashboard after successfully adding user
+    else:
+        return render(request, 'login.html')
 
 
 def editstudent(request, id):
-    data = Student.objects.get(id=id);
+    data = Student.objects.get(id=id)
     context = {'data': data}
     return render(request, 'updatestudent.html', context)
 
@@ -134,4 +133,29 @@ def delstudent(request, id):
     if request.method == 'POST':
         data = Student.objects.get(id=id)
         data.delete()
-        return redirect('')
+        return redirect(request, 'confirm_delete')
+
+
+def student_list(request, id):
+    data = Student.objects.all()
+    context = {'data': data}
+    return render(request, 'product_table.html', context)
+
+
+def edituser(request):
+    data = Student.objects.get()
+    context = {'data': data}
+    return render(request, 'dashboard.html')
+
+
+def add_user(request):
+    if request.method == 'POST':
+        # Process the form data
+        form = UserRegistrationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('dashboard')  # Assuming you have a dashboard view
+    else:
+        form = UserRegistrationForm()
+    context = {'form': form}
+    return render(request, 'register.html', context)
